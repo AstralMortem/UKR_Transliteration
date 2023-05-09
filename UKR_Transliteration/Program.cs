@@ -6,7 +6,7 @@ namespace Transliteration {
     {
         public static void Main(string[] args)
         {
-            Console.WriteLine(Transliteration.TranslateSentence("Приклад номер один"));
+            Console.WriteLine(Transliteration.TranslateSentence("11а"));
         }
     }
 
@@ -66,7 +66,10 @@ namespace Transliteration {
                 {
                     if (!extra_table_char.TryGetValue(str[i].ToString().ToLower(), out ch))
                     {
-                        table_char.TryGetValue(str[i].ToString().ToLower(), out ch);
+                        if(!table_char.TryGetValue(str[i].ToString().ToLower(), out ch))
+                        {
+                            ch = str[i].ToString().ToLower();
+                        }
                     }
 
                     if (Char.IsUpper(str[i]))
@@ -78,13 +81,13 @@ namespace Transliteration {
                 else
                 {
                     
-                    table_char.TryGetValue(str[i].ToString(), out ch);
+                    if(!table_char.TryGetValue(str[i].ToString(), out ch))
+                    {
+                        ch += str[i].ToString();
+                    }
                     result += ch;
                 }
-
-
             }
-
             return result;
         }
 
@@ -115,10 +118,6 @@ namespace Transliteration {
             }
             return res;
         }
-
-        
-
-
     }
 
 
