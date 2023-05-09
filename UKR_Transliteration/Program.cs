@@ -6,7 +6,7 @@ namespace Transliteration {
     {
         public static void Main(string[] args)
         {
-            Console.WriteLine(Transliteration.Translate("Готиня"));
+            Console.WriteLine(Transliteration.TranslateSentence("Приклад номер один"));
         }
     }
 
@@ -54,7 +54,7 @@ namespace Transliteration {
             {"я", "ya" },
         };
 
-        public static string Translate(string str)
+        public static string TranslateWord(string str)
         {
             string result ="";
             string ch = "";
@@ -86,6 +86,20 @@ namespace Transliteration {
             }
 
             return result;
+        }
+
+        public static string TranslateSentence(string str)
+        {
+            
+            string[] words = str.Split(" ");
+
+            for(int i=0; i< words.Length;i++)
+            {
+                words[i] = TranslateWord(words[i]);
+            }
+
+            return string.Join(" ", words);
+
         }
         public static string FirstCharToUpper(string input)
         {
